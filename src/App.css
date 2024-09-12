@@ -1,38 +1,54 @@
 .App {
   text-align: center;
+  max-width: 850px;
+  margin: 40px auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 3em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button {
+  background: #0091f8;
+  border: 2px solid #0091f8;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color:rgb(255, 255, 255);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 2em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+button:hover {
+  background: #fff;
+  color:black;
 }
 
-.App-link {
-  color: #61dafb;
+.card {
+  position: relative;
+  width: 150px;  /* Set a standard width */
+  height: 150px; /* Set a standard height */
+  perspective: 1000px; /* For 3D flipping, if necessary */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fits within the container without distortion */
+  border-radius: 10px; /* Optional: to match the rounded corners of your PNG */
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s;
+  backface-visibility: hidden; /* If you implement card flipping */
+}
+
+.card-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
 }
