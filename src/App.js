@@ -3,12 +3,12 @@ import './App.css'
 import SingleCard from './components/SingleCard'
 
 const cardImages = [
-  { "src": "/img/IMG_1.jpeg"},
-  { "src": "/img/IMG_2.jpeg"},
-  { "src": "/img/IMG_3.jpeg"},
-  { "src": "/img/IMG_4.jpeg"},
-  { "src": "/img/IMG_5.jpeg"},
-  { "src": "/img/IMG_6.jpeg"}
+  { "src": "/img/IMG_1.jpeg", matched : false  },
+  { "src": "/img/IMG_2.jpeg", matched : false },
+  { "src": "/img/IMG_3.jpeg", matched : false },
+  { "src": "/img/IMG_4.jpeg", matched : false },
+  { "src": "/img/IMG_5.jpeg", matched : false },
+  { "src": "/img/IMG_6.jpeg", matched : false }
 ]
 
 function App() {
@@ -27,34 +27,52 @@ function App() {
     setTurns(0)
   }
 
+  //handles choice selection
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
+  //Compare if the cards are the same
   useEffect (() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
-        console.log ("MATCH")
+        setCards (prevCards => {
+          return prevCards.map ( card => {
+            if (card.src === choiceOne.src) {
+              return {...card , matched : true}
+            } else {
+              return card
+            }
+          })
+        })
         resetTurn()
       }else{
-        console.log("not match")
         resetTurn()
       }
     }
   }, [choiceOne, choiceTwo])
 
+  console.log(cards)
+
+  //Resets after a choice is made
   const resetTurn = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
   }
+
   return (
     <div className="App">
       <h1>Memory Game</h1>
       <button onClick={ shuffleCards }>New Game</button>
       <div className = "card-grid" >
         {cards.map (card => (
-          <SingleCard key = {card.id} card = { card } handleChoice = {handleChoice} />
+          <SingleCard 
+          key = {card.id} 
+          card = { card } 
+          handleChoice = {handleChoice} 
+          flipped = {card === choiceOne || card === choiceTwo || card.matched}
+          />
         ))}
       </div>
     </div>

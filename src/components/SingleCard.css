@@ -1,4 +1,4 @@
-.card {
+  .card {
     position: relative;
     width: 150px;  
     height: 150px; 
@@ -10,17 +10,18 @@
     height: 100%;
     object-fit: cover; /* Ensures the image fits within the container without distortion */
     border-radius: 10px; /* Optional: to match the rounded corners of your PNG */
-    position : absolute;
     top: 0;
     left: 0;
   }
   
-  .back {
+  .card .front {
+    transform: rotateY(90deg);
     position: absolute;
-    transition: transform 0.5s;
-    backface-visibility: hidden; /* If you implement card flipping */
   }
-  
+
+  .flipped .front {
+    transform: rotateY(0deg);
+  }
   .card-grid {
     margin-top: 40px;
     display: grid;
