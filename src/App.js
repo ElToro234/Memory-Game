@@ -30,9 +30,10 @@ function App() {
   //handles choice selection
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+    if (card.id === choiceOne?.id) return;
   }
 
-  //Compare if the cards are the same
+  //Compare if the 2 cards
   useEffect (() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
@@ -65,6 +66,7 @@ function App() {
     <div className="App">
       <h1>Memory Game</h1>
       <button onClick={ shuffleCards }>New Game</button>
+      <h3>Turns: { turns }</h3>
       <div className = "card-grid" >
         {cards.map (card => (
           <SingleCard 
